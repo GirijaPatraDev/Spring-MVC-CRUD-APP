@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages= {})
+@ComponentScan(basePackages= {"mvcNoXml.dao", "mvcNoXml.service", "mvcNoXml.exception"})
 public class AppConfig {
 	@Autowired
 	private Environment env;

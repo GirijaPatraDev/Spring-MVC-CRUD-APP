@@ -8,6 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table
@@ -16,12 +22,20 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
+	@NotEmpty(message="Book Name Must Not Be Empty")
+    @Size(min = 2, max = 14, message="Book Name must be between 2-14 characters")
 	private String name;
 	@Column
-	private BigDecimal price;
-	@Column
+	@NotEmpty(message="Author Name Must Not Be Empty")
+	@Size(min=2, max=14, message="Author name must be between 2-14 characters")
 	private String author;
 	@Column
+	@NotNull(message="Price Must be number")
+	@DecimalMin(value="10.0", inclusive=true, message="Price Must be at least 10 dollars")
+	private BigDecimal price;
+	@Column
+	@NotNull(message="Quantity must be a Number")
+	@Min(value=1, message="Minimun Qty provided must be 1")
 	private Integer qty;
 	@Override
 	public String toString() {
